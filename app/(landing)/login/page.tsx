@@ -1,7 +1,10 @@
+import LoginForm from "@/components/login/LoginForm" 
 export default function(){
   return (
-    <div>Login </div>
-
+    <div>
+      Login Prueba
+      <LoginForm/>
+    </div>
   )
 
 }
