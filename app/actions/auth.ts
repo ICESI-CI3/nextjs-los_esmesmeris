@@ -1,5 +1,5 @@
-import { SignInFormSchema, SignInFormState } from '@/app/lib/definitions'
-import { redirect } from 'next/navigation'
+import { SignInFormSchema, SignInFormState } from '../lib/definitions';
+import { redirect } from 'next/navigation';
 
 export async function signIn(formData: FormData) {
   const validatedFields = SignInFormSchema.safeParse({
