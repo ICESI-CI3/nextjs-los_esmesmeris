@@ -1,6 +1,16 @@
 "use client"
-import { signIn } from '@/app/actions/auth'
+import { signIn } from '@/app/actions/auth/auth'
+import { useActionState } from 'react'
+import ErrorAlert from '@/components/error-alert/ErrorAlert';
+
+
+const initialState = {
+  message: '',
+}
+
 export default function LoginForm() {
+  //Use action state to handle errors.
+  const [state, formAction, pending] = useActionState(signIn, initialState);
   return (
     <>
       {/*
@@ -20,9 +30,10 @@ export default function LoginForm() {
           />
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
         </div>
+              {state?.message && (<ErrorAlert message={state.message}/>) }
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action={signIn}>
+          <form action={formAction}>
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-100">
                 Email address

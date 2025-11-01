@@ -3,8 +3,7 @@ import { SignInFormSchema, SignInFormState } from '@/app/lib/definitions'
 import { redirect } from 'next/navigation'
 import {createSession} from '@/app/lib/session'
 
-
-export async function signIn(formData: FormData) {
+export async function signIn(prevState:any,formData: FormData) {
   const validatedFields = SignInFormSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
@@ -17,18 +16,12 @@ export async function signIn(formData: FormData) {
   });
 
   const body =await response.json();
-  if (!body.success){
-    redirect('/login');
+  if (!body.success) {
+    return { message: 'Invalid credentialsss' }
   }
   const token= body.token;
   await createSession(token);
-
-
-  console.log("success");
-
-
-
-
+  redirect('/home');
 
 
 }
